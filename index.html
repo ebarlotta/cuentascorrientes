@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+
+    <link rel="stylesheet" href="styles.scss">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700">
+    <script src="babel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+    <!--<link rel="stylesheet" href="default.min.css">-->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="logo" data-hj-masked="">
+    </div>
+
+    <div class="dropdown pull-right">
+        <button aria-label="cardDropdown1" class="card-dropdown btn btn-table-dropdown pull-right onboarding" type="button" data-toggle="dropdown" data-hj-masked=""></button>
+        <ul class="dropdown-menu table-dropdown-menu" data-hj-masked="">
+            <li><a tabindex="0" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:AumentarLimite(this)" data-indice="1" data-hj-masked="">Aumentar límite transitorio</a></li>
+            <li><a tabindex="1" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:PagarTarjetaNuevo(this)" data-indice="1" data-hj-masked="">Pagar</a></li>
+            <li><a tabindex="2" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:AjaxToResumenes(this)" data-tipoproducto="Amex" data-hj-masked="">Resúmenes mensuales</a></li>
+            <li><a tabindex="3" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:verConsumos(this)" data-indice="1" data-hj-masked="">Ver consumos</a></li>
+            <li><a tabindex="4" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:LinkResumenes(this)" data-indice="1" data-hj-masked="">Ver resumen</a></li>
+            <li><a tabindex="5" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:verTasasyLimites(this)" data-indice="1" data-hj-masked="">Ver tasas y límites</a></li>
+            <li><a tabindex="6" href="javascript:void(0)" onclick="event.stopPropagation(); javascript:verMasOpciones(this)" data-indice="1" data-hj-masked="">Ver más opciones...</a></li>
+        </ul>
+    </div>
+    <p class="expiration up" data-hj-masked="">
+        DÉBITO AUT. | VENCE 03/08
+    </p>
+    <div class="clearfix" data-hj-masked=""></div>
+
+    <div class="card-content">
+        <div class="clearfix">
+            <div class="balance full">
+                <br>
+                <p class="expiration" data-hj-masked="">¡Tu resumen está listo!</p>
+                <div class="clearfix" data-hj-masked=""></div>
+                <p class="expiration push-top-5" data-hj-masked="">
+                    Pago Total:
+                    <span style="display:inline">
+                                                                        $15.030,01 +
+                                                                        U$D0,00
+                                                                    </span>
+                    <br> Pago Mínimo:
+                    <span style="display:inline">
+                                                                        $1.010,00
+                                                                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a type="button" aria-label="ver consumos" href="javascript:void(0)" onclick="event.stopPropagation();Link('/tarjetas/consumos/1');" class="btn btn-caps-card text-left" data-hj-masked="">VER NUEVOS CONSUMOS</a>
+            <a type="button" aria-label="ver resumen" href="javascript:void(0)" onclick="event.stopPropagation();Link('/tarjetas/resumen/1');" class="btn btn-caps-card" data-hj-masked="">VER RESUMEN</a>
+        </div>
+    </div>
+
+
+
+
+
+
+    <h1 class="title">Hover over the cards</h1>
+
+    <div id="app" class="container">
+        <card data-image="https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=">
+            <h1 slot="header">Canyons</h1>
+            <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </card>
+        <card data-image="https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=">
+            <h1 slot="header">Beaches</h1>
+            <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </card>
+        <card data-image="https://images.unsplash.com/photo-1479644025832-60dabb8be2a1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=">
+            <h1 slot="header">Trees</h1>
+            <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </card>
+        <card data-image="https://images.unsplash.com/photo-1479621051492-5a6f9bd9e51a?dpr=2&auto=compress,format&fit=crop&w=1199&h=811&q=80&cs=tinysrgb&crop=">
+            <h1 slot="header">Lakes</h1>
+            <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </card>
+    </div>
+</body>
+
+</html>
