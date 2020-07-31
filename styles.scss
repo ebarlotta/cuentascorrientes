@@ -1,133 +1,128 @@
-$hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
-$returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 body {
-    margin: 40px 0;
-    font-family: "Raleway";
-    font-size: 14px;
-    font-weight: 500;
-    background-color: #BCAAA4;
-    -webkit-font-smoothing: antialiased;
+    font-family: Helvetica, Verdana, Arial, Verdana, sans-serif;
 }
 
-.title {
-    font-family: "Raleway";
-    font-size: 24px;
-    font-weight: 700;
-    color: #5D4037;
-    text-align: center;
+.contenedor {
+    font-family: sans-serif;
+    height: 250px;
+    //margin: auto;
+    width: 100%; // width: 250px;
+    -webkit-perspective: 700;
+    display: inline-flex; //display: ruby-text-container;
+    //display: -webkit-box;
 }
 
-p {
-    line-height: 1.5em;
-}
-
-h1+p,
-p+p {
-    margin-top: 10px;
-}
-
-.container {
-    padding: 40px 80px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card-wrap {
-    margin: 10px;
-    transform: perspective(800px);
-    transform-style: preserve-3d;
-    cursor: pointer;
-    // background-color: #fff;
-    &:hover {
-        .card-info {
-            transform: translateY(0);
-        }
-        .card-info p {
-            opacity: 1;
-        }
-        .card-info,
-        .card-info p {
-            transition: 0.6s $hoverEasing;
-        }
-        .card-info:after {
-            transition: 5s $hoverEasing;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .card-bg {
-            transition: 0.6s $hoverEasing, opacity 5s $hoverEasing;
-            opacity: 0.8;
-        }
-        .card {
-            transition: 0.6s $hoverEasing, box-shadow 2s $hoverEasing;
-            box-shadow: rgba(white, 0.2) 0 0 40px 5px, rgba(white, 1) 0 0 0 1px, rgba(black, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
-        }
-    }
-}
-
-.card {
-    position: relative;
-    flex: 0 0 240px;
-    width: 240px;
-    height: 320px;
-    background-color: #333;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: rgba(black, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset rgba(white, 0.5) 0 0 0 6px;
-    transition: 1s $returnEasing;
-}
-
-.card-bg {
-    opacity: 0.5;
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 100%;
+.carta {
     height: 100%;
-    padding: 20px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    transition: 1s $returnEasing, opacity 5s 1s $returnEasing;
-    pointer-events: none;
+    width: 200px; //width: 100%;
+    transition: all 1s;
+    transform-style: preserve-3d;
+    box-shadow: 0px 0px 5px black;
+    position: inherit;
+    margin: 10px;
 }
 
-.card-info {
-    padding: 20px;
+.carta:hover {
+    transform: rotateY(180deg);
+}
+
+.lado {
     position: absolute;
-    bottom: 0;
-    color: #fff;
-    transform: translateY(40%);
-    transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-    p {
-        opacity: 0;
-        text-shadow: rgba(black, 1) 0 2px 3px;
-        transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    * {
-        position: relative;
-        z-index: 1;
-    }
-    &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
-        width: 100%;
-        height: 100%;
-        background-image: linear-gradient(to bottom, transparent 0%, rgba(#000, 0.6) 100%);
-        background-blend-mode: overlay;
-        opacity: 0;
-        transform: translateY(100%);
-        transition: 5s 1s $returnEasing;
-    }
+    height: 100%;
+    width: 100%;
+    background: #F0F0F0;
+    backface-visibility: hidden;
 }
 
-.card-info h1 {
-    font-family: "Playfair Display";
-    font-size: 36px;
-    font-weight: 700;
-    text-shadow: rgba(black, 0.5) 0 10px 10px;
+.frente {
+    //background-color: crimson;
+}
+
+.frente h3-min {
+    position: absolute;
+    font-size: 24px;
+    margin-top: 180px;
+    margin-left: 10px;
+    color: #fff;
+    //-webkit-text-stroke: 1px #666666;
+    text-shadow: -1px -1px 1px #666666, 1px 1px 1px #666666, -1px 1px 1px #666666, 1px -1px 1px #666666;
+}
+
+.frente h3 {
+    position: absolute;
+    font-size: 26px;
+    margin-top: 200px;
+    margin-left: 10px;
+    color: #fff;
+    //-webkit-text-stroke: 1px #666666;
+    text-shadow: -1px -1px 1px #666666, 1px 1px 1px #666666, -1px 1px 1px #666666, 1px -1px 1px #666666;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 204px;
+}
+
+li {
+    text-decoration: none;
+    padding: 10px;
+    z-index: 80;
+}
+
+.atras {
+    height: 100%;
+    width: 100%;
+    transform: rotateY(180deg);
+}
+
+.atras h3 {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.contenedor-encabezado {
+    height: 100px;
+    margin: auto;
+    width: 98%; // width: 250px;
+    -webkit-perspective: 700;
+    display: ruby-text-container;
+    display: -webkit-box;
+}
+
+.encabezado {
+    height: 100%;
+    width: 95%;
+    transition: all 1s;
+    transform-style: preserve-3d;
+    box-shadow: 0px 0px 5px black;
+    position: inherit;
+    //margin-left: 10px;
+    //margin-right: 20px;
+}
+
+.img-perfil {
+    margin: 2px 2px 2px 2px;
+    height: 100px;
+    width: 100px;
+    border-radius: 30px;
+}
+
+.residente {
+    display: flex;
+    width: 98%;
+    margin-left: 11px;
+    box-shadow: 0px 0px 5px black;
+    -webkit-perspective: 700;
+}
+
+div {
+    margin-bottom: 5px !important;
 }

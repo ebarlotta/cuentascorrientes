@@ -1,15 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="datosApp">
 
 <head>
-    <link rel="stylesheet" href="styles3.scss">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.scss">
+
+    <!-- Angular -->
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="ElementosController.js">
+    </script>
+
+    <link rel="stylesheet" href="styles.scss">
 </head>
 
-<body>
+<body ng-controller="ElementosController" ng-init="CargarResidentes();">
+
     <div class="residente">
         <div style="width: 80%; margin-bottom: 2%; display: flex;">
-            <p style="margin: 30px 20px;">PRECIOZO ADELA</p>
+            <p style="margin: 30px 20px; font-size: 24px;">PRECIOZO ADELA</p>
         </div>
-        <div style="width: 20%;">
+        <div style="width: 20%;padding-top: 6px;">
             <img class="img-perfil" src="assets/panales.jpg" alt="">
         </div>
     </div>

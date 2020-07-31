@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="datosApp">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.scss">
+
+    <!-- Angular -->
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="ElementosController.js">
+    </script>
+
+</head>
+
+<body ng-controller="ElementosController" ng-init="CargarResidentes();">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col" style="background: rgb(238,174,202);
+            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(208,171,206,1) 0%, rgba(109,160,219,1) 40%); border-radius: 10px; border: 1px solid gray">
+                <p style="margin: 30px 20px; font-size: 20px;">CARGA DE ELEMENTOS</p>
+                <div>
+                    Residente
+                    <select class="form-control" ng-model="cmbResidente">
+                    <option value="" selected></option>
+                    <option ng-repeat="residente in residentes | orderBy:'NombrePaciente'" value={{residente.IdPaciente}}>{{ residente.NombrePaciente }}</option>
+                    </select>
+                </div>
+                <div>
+                    Elemento
+                    <select class="form-control" ng-model="cmbElemento">
+                        <option value="" selected></option>
+                        <option value="Panales">Pañales</option>
+                        <option value="Descartables">Descartables</option>
+                        <option value="Servicios">Servicios</option>
+                        <option value="Insumos">Insumos</option>
+                    </select>
+                </div>
+                <div>
+                    Cantidad
+                    <input class="form-control" type="text" ng-model="Cantidad" placeholder="Cantidad">
+                </div>
+                <div>
+                    Fecha
+                    <input class="form-control" type="date" ng-model="Fecha" id="Fecha">
+                </div>
+                <div>
+                    Precio Unitario
+                    <input class="form-control" type="text" ng-model="Precio" placeholder="Precio Unitario">
+                </div>
+                <div>
+                    Detalle
+                    <textarea class="form-control" name="" id="" cols="30" ng-model="Detalle" rows="3"></textarea>
+                </div><br>
+                <div class="row col-sm-12 justify-content-md-center">
+                    <input class="form-control col-sm-5 offset-sm-1 btn btn-success" type="button" value="Agregar" ng-click="AgregarElemento();"><input class="form-control col-5 offset-md-1 btn btn-info" type="button" value="Volver">
+                </div>
+                <div class="container">
+                    <h1 class="display-5">{{ Mensaje }}</h1>
+                    <p class="lead"></p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12" style="background: rgb(238,174,202);
+            background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(208,171,206,1) 0%, rgba(109,160,219,1) 40%); border-radius: 10px;border: 1px solid gray">
+                <!-- https://cssgradient.io/-->
+                <form action="upload_image.php" method="POST" enctype="multipart/form-data">
+                    <p style="margin: 30px 20px; font-size: 20px;">ACTUALIZAR DATOS RESIDENTE</p>
+                    <div>
+                        Residente
+                        <select class="form-control" ng-model="cmbResidenteDatos">
+                        <option value=""></option>
+                        <option ng-repeat="residenteDatos in residentes | orderBy:'NombrePaciente'">{{ residenteDatos.NombrePaciente }}</option>
+                    </select>
+                    </div>
+                    <div>
+                        Foto de Perfil
+                        <input class="form-control" type="file" name="file" id="file">
+                    </div>
+                    <div class="justify-content-md-center offset-sm-3 offset-md-1">
+                        <img class="form-control" src="assets/sinfoto.png" alt="" style="width:285px; height:285px; margin-top: 15px; margin-bottom: 15px;">
+                        <img ng-src="{{ residenteDatos.imgperfil }}" src="{{ imgperfil }}">
+
+                    </div>
+                    <div class="row col-12 justify-content-md-center">
+                        <input class="form-control col-sm-5 offset-sm-1 btn btn-success" type="submit" value="Agregar"><input class="form-control col-5 offset-md-1 btn btn-info" type="button" value="Volver">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
