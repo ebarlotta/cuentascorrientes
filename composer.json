@@ -1,0 +1,11 @@
+{
+    "name": "cuentascorrientes/hostal",
+    "license": "MTU",
+    "authors": [{
+        "name": "ebarlotta",
+        "email": "enzobarlotta@gmail.com"
+    }],
+    "require": {
+        "mercadopago/dx-php": "^2.1"
+    }
+}

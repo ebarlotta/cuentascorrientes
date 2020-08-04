@@ -83,24 +83,29 @@ switch ($Opcion) {
     case "Cargar_detalle_panales":
         $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes, Fecha";
         $result = mysqli_query($link, $query);
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-
-            $datos[]['Anio']           = $row['Anio'];
-            $datos[]['Mes']            = $row['Mes'];
-            $datos[]['Elemento']       = $row['Elemento'];
-            $datos[]['Fecha']          = $row['Fecha'];
-            $datos[]['Cantidad']       = $row['Cantidad'];
-            $datos[]['PrecioUnitario'] = $row['PrecioUnitario'];
-        }
+        $cont=-1;
         $saldoParcial = 0;
+        while ($row = $result->fetch_assoc()) {
+            $cont++;
+            $rows[$cont] = $row;
 
-
-        
-        for ($i = 0; $i < count($rows); $i++) {
-            $saldoParcial = $saldo + $rows[$i]["Debe"] - $rows[$i]["Haber"];
+            $datos[$cont]['Anio']           = $row['Anio'];
+            $datos[$cont]['Mes']            = $row['Mes'];
+            $datos[$cont]['Elemento']       = $row['Elemento'];
+            $datos[$cont]['Fecha']          = substr($row['Fecha'],8,2). "-" .substr($row['Fecha'],5,2). "-" .substr($row['Fecha'],0,4);
+            $datos[$cont]['Cantidad']       = $row['Cantidad'];
+            $datos[$cont]['PrecioUnitario'] = $row['PrecioUnitario'];
+            $datos[$cont]['Debe'] = $row['Debe'];
+            $datos[$cont]['Haber'] = $row['Haber'];
+            $saldoParcial = $saldoParcial + $rows[$cont]["Debe"] - $rows[$cont]["Haber"];
+            $datos[$cont]['Saldo'] = $saldoParcial;
         }
-        $datos['SaldoInsumos'] = $saldo;
+        
+        
+        /*for ($i = 0; $i < count($rows); $i++) {
+            
+        }*/
+        //$datos['SaldoInsumos'] = $saldoParcial;
         break;
 }
 

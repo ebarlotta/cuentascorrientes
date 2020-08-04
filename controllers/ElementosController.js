@@ -85,19 +85,19 @@ misDatos.controller('ElementosController', function($scope, $http) {
                 $scope.detalle_panales = datos.data;
             });
     }
-    $scope.Cargar_detalle_descartables = function(id) {
+    $scope.Cargar_detalle_descartablesa = function(id) {
         $http.get('recursos/DevolverDatos.php' + '?Opcion=Cargar_detalle_descartables&Param=' + id)
             .then(function(datos) {
                 $scope.detalle_panales = datos.data;
             });
     }
-    $scope.Cargar_detalle_servicios = function(id) {
+    $scope.Cargar_detalle_serviciosa = function(id) {
         $http.get('recursos/DevolverDatos.php' + '?Opcion=Cargar_detalle_servicios&Param=' + id)
             .then(function(datos) {
                 $scope.detalle_panales = datos.data;
             });
     }
-    $scope.Cargar_detalle_insumos = function(id) {
+    $scope.Cargar_detalle_insumosa = function(id) {
         $http.get('recursos/DevolverDatos.php' + '?Opcion=Cargar_detalle_insumos&Param=' + id)
             .then(function(datos) {
                 $scope.detalle_panales = datos.data;

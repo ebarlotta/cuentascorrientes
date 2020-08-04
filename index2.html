@@ -1,0 +1,31 @@
+<form action="https://www.mercadopago.com/checkout/init" method="post" enctype="application/x-www-form-urlencoded" target="">
+    <!-- Autenticaci&oacute;n y hash MD5 -->
+    <input type="hidden" name="client_id" value="619797354" />
+    <?
+// md5('client_id'.'client_secret'.'item_quantity'.'item_currency_id'.'item_unit_price'.'item_id'.'external_reference');
+//http://developers.mercadopago.com/documentacion/boton-html-md5#
+    $hash_md5 = md5('619797354'.'zzzzzzzzzzzzz'.'1'.'ARS'.$total_de_orden.'1'.'referencia_externa_del_vendedor');
+?>
+
+        <input type="hidden" name="md5" value="<? echo $hash_md5; ?>" />
+
+        <!-- Datos obligatorios del item -->
+        <input type="hidden" name="item_title" value="Orden <? echo $insert_id; ?>" />
+        <input type="hidden" name="item_quantity" value="1" />
+        <input type="hidden" name="item_currency_id" value="ARS" />
+        <input type="hidden" name="item_unit_price" value="<? echo $total_de_orden; ?>" />
+
+        <!-- Datos opcionales -->
+        <input type="hidden" name="item_id" value="1" />
+        <input type="hidden" name="external_reference" value="referencia_externa_del_vendedor" />
+        <input type="hidden" name="item_picture_url" value="imagen_del_item" />
+        <input type="hidden" name="payer_name" value="<? echo $order->customer['firstname']; ?>" />
+        <input type="hidden" name="payer_surname" value="<? echo $order->customer['lastname']; ?>" />
+        <input type="hidden" name="payer_email" value="<? echo $order->customer['email_address']; ?>" />
+        <input type="hidden" name="back_url_success" value="http://www.xxxx.com.ar/" />
+        <input type="hidden" name="back_url_pending" value="http://www.xxxx.com.ar/" />
+
+        <!-- Boton de pago -->
+        <button type="submit" class="lightblue-rn-m-tr" name="MP-Checkout">Pagar</button>
+        <input type="submit" value="Cancelar" onclick="history.go(-1);return false;" />
+</form>
