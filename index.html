@@ -1,24 +1,30 @@
-<!DOCTYPE html>
-<html ng-app="datosApp">
+<?php
+session_start();
+?>
+    <!DOCTYPE html>
+    <html ng-app="datosApp">
 
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="recursos/librerias/bootstrap.min.css">
-    <script src="recursos/librerias/jquery-3.5.1.slim.min.js"></script>
-    <script src="recursos/librerias/popper.min.js"></script>
-    <script src="recursos/librerias/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="recursos/librerias/styles.scss">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="recursos/librerias/bootstrap.min.css">
+        <script src="recursos/librerias/jquery-3.5.1.slim.min.js"></script>
+        <script src="recursos/librerias/popper.min.js"></script>
+        <script src="recursos/librerias/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="recursos/librerias/styles.scss">
 
-    <!-- Angular -->
-    <script type="text/javascript" src="recursos/librerias/angular.min.js"></script>
-    <script type="text/javascript" src="controllers/ElementosController.js">
-    </script>
-    <!-- FORMULARIO MODAL 
+        <!-- Angular -->
+        <script type="text/javascript" src="recursos/librerias/angular.min.js"></script>
+        <script type="text/javascript" src="controllers/ElementosController.js">
+        </script>
+        <!-- FORMULARIO MODAL 
     <script type="text/javascript" src="recursos/jquery.min.js"></script>
     <script type="text/javascript" src="recursos/bootstrap.min.js"></script>-->
-    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+        <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+        <!-- // Sirve para pasar contenido HTML -->
+        <script src="recursos/librerias/angular-sanitize.js"></script>
 
-    <?php 
+
+        <?php 
         // SDK de Mercado Pago
         require __DIR__  . '/vendor/autoload.php'; 
         // Agrega credenciales
@@ -26,157 +32,186 @@
     ?>
 
 
-</head>
+    </head>
 
-<body ng-controller="ElementosController">
+    <body ng-controller="ElementosController">
 
-    <div class="residente">
-        <div style="width: 80%; margin-bottom: 2%; display: flex;">
-            <div class="col">
-                <div>
-                    <p style="margin: 30px 20px; font-size: 24px;">Ingrese el número de documento del Residente <input type="text" ng-model="dni" value="4985933">
-                    </p>
+        <div class="residente">
+            <div style="width: 80%; margin-bottom: 2%; display: flex;">
+                <div class="col">
+                    <div>
+                        <p style="margin: 30px 20px; font-size: 24px;">Ingrese el número de documento del Residente <input type="text" ng-model="dni" value="4985933">
+                        </p>
+                    </div>
+                    <div style="width: 80%; margin-bottom: 2%; margin-left: 20px;">
+                        <label>Nombre del Residente: {{ Nombre }}</label><label> ID: {{ ID }}</label>
+                    </div>
                 </div>
-                <div style="width: 80%; margin-bottom: 2%; margin-left: 20px;">
-                    <label>Nombre del Residente: {{ Nombre }}</label><label> ID: {{ ID }}</label>
-                </div>
+
+                <?php include_once("vendor/mercadopago/dx-php/samples/checkout-buttons/basic-preference/button.php"); ?>
             </div>
-
-            <?php include_once("vendor/mercadopago/dx-php/samples/checkout-buttons/basic-preference/button.php"); ?>
+            <div style="width: 20%;padding-top: 6px;">
+                <a href="#" ng-click="CargarDatosResidente(dni);">
+                    <img class="img-perfil" src="assets/panales.jpg" alt=""><br> Consultar
+                </a>
+            </div>
         </div>
-        <div style="width: 20%;padding-top: 6px;">
-            <a href="#" ng-click="CargarDatosResidente(dni);">
-                <img class="img-perfil" src="assets/panales.jpg" alt=""><br> Consultar
-            </a>
-        </div>
-    </div>
-    <div ng-show="ID">
-        <div class="contenedor" style="width: 100%;">
-            <div class="carta">
+        <div ng-show="ID">
+            <div class="contenedor" style="width: 100%;">
+                <div class="carta">
 
-                <div class="lado frente">
-                    <h3>Pañales</h3>
-                    <img src="assets/panales.jpg" alt="">
-                </div>
+                    <div class="lado frente">
+                        <h3>Pañales</h3>
+                        <img src="assets/panales.jpg" alt="">
+                    </div>
 
-                <div class="lado atras">
-                    <h3>Pañales</h3>
-                    <ul>
-                        <li>Detalle: <input type="button" value="Detalle" ng-click="Cargar_detalle_panales(ID);" data-toggle="modal" data-target="#ModalPanales"></li>
-                        <li>Cantidad: {{ SaldoPanalesCantidad }} u.</li>
-                        <li>Saldo: $ {{ SaldoPanales }}</li>
-                        <form action="recursos/pagos/pagar.php" method="POST">
-                            <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="<?php echo $preference->id; ?>">
+                    <div class="lado atras">
+                        <h3>Pañales</h3>
+                        <ul>
+                            <!--<li>Detalle: <input type="button" value="Detalle" ng-click="Cargar_detalle_panales(ID);" data-toggle="modal" data-target="#ModalPanales"></li>-->
+                            <a href="recursos/pagos/pagar.php?ID={{ID}}" target="_blank">
+                                <input type="button" class="button" value="Detalle" />
+                            </a>
+
+                            <!--<li>New Detalle: <input type="button" value="Detalle" ng-click="Cargar_detalle_panales(ID);" onClick="window.location.href='recursos/pagos/pagar.php?ID='+ID;">
+                            </li>-->
+                            <li>Cantidad: {{ SaldoPanalesCantidad }} u.</li>
+                            <li>Saldo: $ {{ SaldoPanales }}</li>
+                            <!--<a href="recursos/pagos/pagar.php?Id=221&Cantidad={{SaldoPanalesCantidad}}&Monto={{SaldoPanales}}">
+                            <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="{{preferenciaId}}"></script>
+                            <button>Pagar</button>
+                        </a>
+
+                        <form action="recursos/pagos/pagar.php" method="POST">-->
+                            <!--<script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="<?php echo $preference->id; ?>">-->
+                            <!--    <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="{{preferenciaId}}"></script>
                             </script>
-                        </form>
-                    </ul>
+                        </form>-->
+
+
+                            <!--<a href="recursos/pagos/pagar2.php">
+                            <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="<?php echo $preference->id; ?>"></script>
+                            
+                        </a>
+
+                        <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="{{preferenciaId}}">
+                            < button ng - click = "Cargar_detalle_panales(ID);" > Pagar < /button>
+                        </script>-->
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="carta">
+
+                    <div class="lado frente">
+                        <h3>Descartables</h3>
+                        <img src="assets/sondas.jpg" alt="">
+                    </div>
+
+                    <div class="lado atras">
+                        <h3>Descartables</h3>
+                        <ul>
+                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_descartables(dni);" data-toggle="modal" data-target="#ModalDescartables"></li>
+                            <li>Saldo: $ {{ SaldoDescartables }}</li>
+                            <li><input type="button" value="Pagar"></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="carta">
+
+                    <div class="lado frente">
+                        <h3-min>Servicio Geriátrico</h3-min>
+                        <img src="assets/atencion.jpg" alt="">
+                    </div>
+
+                    <div class="lado atras">
+                        <h5>Servicios Geriátricos</h5>
+                        <ul>
+                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_servicios(dni);" data-toggle="modal" data-target="#ModalServicios"></li>
+                            <li>Saldo: $ {{ SaldoServicios }}</li>
+                            <li><input type="button" value="Pagar"></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="carta">
+
+                    <div class="lado frente">
+                        <h3>Insumos</h3>
+                        <img src="assets/insumos2.jpg" alt="">
+                    </div>
+
+                    <div class="lado atras">
+                        <h3>Insumos</h3>
+                        <ul>
+                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_insumos(dni);" data-toggle="modal" data-target="#ModalInsumos"></li>
+                            <li>Saldo: $ {{ SaldoInsumos }}</li>
+                            <li><input type="button" value="Pagar"></li>
+                        </ul>
+                    </div>
+
                 </div>
 
             </div>
-            <div class="carta">
-
-                <div class="lado frente">
-                    <h3>Descartables</h3>
-                    <img src="assets/sondas.jpg" alt="">
-                </div>
-
-                <div class="lado atras">
-                    <h3>Descartables</h3>
-                    <ul>
-                        <li>Detalle: <input type="button" value="Detalle" ng-click="Cargar_detalle_descartables(dni);" data-toggle="modal" data-target="#ModalDescartables"></li>
-                        <li>Saldo: $ {{ SaldoDescartables }}</li>
-                        <li><input type="button" value="Pagar"></li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="carta">
-
-                <div class="lado frente">
-                    <h3-min>Servicio Geriátrico</h3-min>
-                    <img src="assets/atencion.jpg" alt="">
-                </div>
-
-                <div class="lado atras">
-                    <h5>Servicios Geriátricos</h5>
-                    <ul>
-                        <li>Detalle: <input type="button" value="Detalle" ng-click="Cargar_detalle_servicios(dni);" data-toggle="modal" data-target="#ModalServicios"></li>
-                        <li>Saldo: $ {{ SaldoServicios }}</li>
-                        <li><input type="button" value="Pagar"></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="carta">
-
-                <div class="lado frente">
-                    <h3>Insumos</h3>
-                    <img src="assets/insumos2.jpg" alt="">
-                </div>
-
-                <div class="lado atras">
-                    <h3>Insumos</h3>
-                    <ul>
-                        <li>Detalle: <input type="button" value="Detalle" ng-click="Cargar_detalle_insumos(dni);" data-toggle="modal" data-target="#ModalInsumos"></li>
-                        <li>Saldo: $ {{ SaldoInsumos }}</li>
-                        <li><input type="button" value="Pagar"></li>
-                    </ul>
-                </div>
-
-            </div>
-
         </div>
-    </div>
 
 
-    <!-- // Detalle de Pañale 
+        <!-- // Detalle de Pañale 
     ------------------------->
-    <div class="modal fade" id="ModalPanales" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: min-content;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Hostal de los abuelos - Detalle de Pañales</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal fade" id="ModalPanales" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: min-content;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Hostal de los abuelos - Detalle de Pañales</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table-responsive table-striped table-bordered">
-                        <tr>
-                            <td>Año</td>
-                            <td>Mes</td>
-                            <td>Elemento</td>
-                            <td>Fecha Movimiento</td>
-                            <td>Cantidad</td>
-                            <td>Precio Unitario</td>
-                            <td>Debe</td>
-                            <td>Haber</td>
-                            <td>Saldo</td>
-                        </tr>
-                        <tr ng-repeat="detalle_panal in detalle_panales">
-                            <!--<tr>-->
-                            <td>{{ detalle_panal.Anio }}</td>
-                            <td style="text-align: center;">{{ detalle_panal.Mes }}</td>
-                            <td>{{ detalle_panal.Fecha }}</td>
-                            <td style="text-align: center;">{{ detalle_panal.Elemento }}</td>
-                            <td style="text-align: right;">{{ detalle_panal.Cantidad }}</td>
-                            <td style="text-align: right;">{{ detalle_panal.PrecioUnitario }}</td>
-                            <td style="text-align: right;">{{ detalle_panal.Debe }}</td>
-                            <td style="text-align: right;">{{ detalle_panal.Haber }}</td>
-                            <td style="text-align: right;">{{ detalle_panal.Saldo }}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer row">
-                    <button type="button" class="btn btn-info form-control col-3">Pago Parcial</button>
-                    <button type="button" class="btn btn-primary form-control col-3">Pagar</button>
-                    <button type="button" class="btn btn-secondary form-control col-3" data-dismiss="modal">Cerrar</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table-responsive table-striped table-bordered">
+                            <tr>
+                                <td>Año</td>
+                                <td>Mes</td>
+                                <td>Elemento</td>
+                                <td>Fecha Movimiento</td>
+                                <td>Cantidad</td>
+                                <td>Precio Unitario</td>
+                                <td>Debe</td>
+                                <td>Haber</td>
+                                <td>Saldo</td>
+                            </tr>
+                            <tr ng-repeat="detalle_panal in detalle_panales">
+                                <!--<tr>-->
+                                <td>{{ detalle_panal.Anio }}</td>
+                                <td style="text-align: center;">{{ detalle_panal.Mes }}</td>
+                                <td>{{ detalle_panal.Fecha }}</td>
+                                <td style="text-align: center;">{{ detalle_panal.Elemento }}</td>
+                                <td style="text-align: right;">{{ detalle_panal.Cantidad }}</td>
+                                <td style="text-align: right;">{{ detalle_panal.PrecioUnitario }}</td>
+                                <td style="text-align: right;">{{ detalle_panal.Debe }}</td>
+                                <td style="text-align: right;">{{ detalle_panal.Haber }}</td>
+                                <td style="text-align: right;">{{ detalle_panal.Saldo }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer row">
+                        <!--<button type="button" class="btn btn-info form-control col-3">Pago Parcial</button>-->
 
+                        <div data-ng-bind-html="preferenciaId"></div>
+                        <div data-ng-bind-html="preferenciaId2"></div>
+                        <form action="https://localhost/cuentascorrientes/recursos/pagos/aprobado.php" method="POST">
+                            <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="<?php echo $_SESSION['preferenciaId']; ?>"></script>
+                        </form>
+                        <!--<button type="button" class="btn btn-primary form-control col-3">Pagar</button>-->
+                        <button type="button" class="btn btn-secondary form-control col-3" data-dismiss="modal">Cerrar</button>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 
-</html>
+    </html>

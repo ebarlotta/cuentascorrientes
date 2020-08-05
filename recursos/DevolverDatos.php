@@ -40,6 +40,7 @@ switch ($Opcion) {
         }
         $datos['SaldoPanales'] = $saldo;
         $datos['SaldoPanalesCantidad'] = $saldoCantidad;
+        $datos['preferenciaId'] = 1000; //Revisar
         break;
     case "CargarElementos_descartables":
         $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Descartables' and IdResidente=$Parametros ORDER BY Anio, Mes";
@@ -83,7 +84,7 @@ switch ($Opcion) {
     case "Cargar_detalle_panales":
         $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes, Fecha";
         $result = mysqli_query($link, $query);
-        $cont=-1;
+        $cont = -1;
         $saldoParcial = 0;
         while ($row = $result->fetch_assoc()) {
             $cont++;
@@ -92,20 +93,15 @@ switch ($Opcion) {
             $datos[$cont]['Anio']           = $row['Anio'];
             $datos[$cont]['Mes']            = $row['Mes'];
             $datos[$cont]['Elemento']       = $row['Elemento'];
-            $datos[$cont]['Fecha']          = substr($row['Fecha'],8,2). "-" .substr($row['Fecha'],5,2). "-" .substr($row['Fecha'],0,4);
-            $datos[$cont]['Cantidad']       = $row['Cantidad'];
+            $datos[$cont]['Fecha']          = substr($row['Fecha'], 8, 2) . "-" . substr($row['Fecha'], 5, 2) . "-" . substr($row['Fecha'], 0, 4);
             $datos[$cont]['PrecioUnitario'] = $row['PrecioUnitario'];
             $datos[$cont]['Debe'] = $row['Debe'];
             $datos[$cont]['Haber'] = $row['Haber'];
-            $saldoParcial = $saldoParcial + $rows[$cont]["Debe"] - $rows[$cont]["Haber"];
+            $CantidadParcial = $CantidadParcial + $row['Cantidad'];     // Cuenta la cantidad de pañales totales
+            $datos[$cont]['Cantidad']       = $row['Cantidad'];
+            $saldoParcial = $saldoParcial + $rows[$cont]["Debe"] - $rows[$cont]["Haber"];   // Cuenta el saldo parcial de cada item
             $datos[$cont]['Saldo'] = $saldoParcial;
         }
-        
-        
-        /*for ($i = 0; $i < count($rows); $i++) {
-            
-        }*/
-        //$datos['SaldoInsumos'] = $saldoParcial;
         break;
 }
 

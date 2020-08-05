@@ -1,4 +1,4 @@
-var misDatos = angular.module('datosApp', []);
+var misDatos = angular.module('datosApp', ['ngSanitize']);
 
 misDatos.controller('ElementosController', function($scope, $http) {
 
@@ -78,13 +78,21 @@ misDatos.controller('ElementosController', function($scope, $http) {
 
 
     // DETALLE
-
     $scope.Cargar_detalle_panales = function(id) {
-        $http.get('recursos/DevolverDatos.php' + '?Opcion=Cargar_detalle_panales&Param=' + id)
-            .then(function(datos) {
-                $scope.detalle_panales = datos.data;
-            });
-    }
+            $http.get('recursos/pagos/pagar2.php')
+                .then(function(datos) {
+                    $scope.detalle_panales = datos.data;
+                    $scope.preferenciaId = datos.data['preferenciaId'];
+                    $scope.preferenciaId2 = datos.data['preferenciaId2'];
+                });
+        }
+        /*$scope.Cargar_detalle_panales = function(id) {
+            $http.get('recursos/DevolverDatos.php' + '?Opcion=Cargar_detalle_panales&Param=' + id)
+                .then(function(datos) {
+                    $scope.detalle_panales = datos.data;
+                    $scope.preferenciaId = datos.data['preferenciaId'];
+                });
+        }*/
     $scope.Cargar_detalle_descartablesa = function(id) {
         $http.get('recursos/DevolverDatos.php' + '?Opcion=Cargar_detalle_descartables&Param=' + id)
             .then(function(datos) {
