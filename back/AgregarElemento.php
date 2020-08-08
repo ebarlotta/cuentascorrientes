@@ -26,7 +26,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$sql = "INSERT INTO tblElementos (IdResidente, Anio, Mes, Elemento, Fecha, Debe, Haber, Detalle, Cantidad, PrecioUnitario, Pendiente) VALUES ($Id,$Anio,$Mes,'$Elemento','$Fecha',$Debe,$Haber,'$Detalle',$Cantidad,$Precio,1)";
+$sql = "INSERT INTO tblElementosDescartables (IdResidente, Anio, Mes, Elemento, Fecha, Debe, Haber, Detalle, Cantidad, PrecioUnitario, Pendiente) VALUES ($Id,$Anio,$Mes,'$Elemento','$Fecha',$Debe,$Haber,'$Detalle',$Cantidad,$Precio,1)";
 
         $mysqli->query($sql);
         if(mysqli_affected_rows($mysqli)) {

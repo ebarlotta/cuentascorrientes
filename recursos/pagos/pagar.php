@@ -7,7 +7,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 $ID = $_GET['ID'];
-$query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
+$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
 $resultR = mysqli_query($link, $query);
 $saldoParcial = 0; $CantidadParcial = 0; $Acum='';
 while ($row = $resultR->fetch_assoc()) {
@@ -28,6 +28,7 @@ while ($row = $resultR->fetch_assoc()) {
     $Acum .= "</tr>";    
 }
 
+
 // SDK de Mercado Pago
 require '../../vendor/autoload.php';
 //require __DIR__ .  '../../vendor/autoload.php';
@@ -39,9 +40,9 @@ MercadoPago\SDK::setAccessToken('TEST-1562349347568381-080402-1818024ae10d94b0da
 $preference = new MercadoPago\Preference();
 
 $preference->back_urls = array(
-    "success" => "https://localhost/cuentascorrientes/recursos/pagos/aprobado.php",
-    "failure" => "http://www.tu-sitio/failure",
-    "pending" => "http://www.tu-sitio/pending"
+    "success" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/aprobado.php",
+    "failure" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/error.php",
+    "pending" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/pendiente.php"
 );
 $preference->auto_return = "approved";
 
@@ -91,7 +92,7 @@ $preference->save();
             <?php echo $Acum; ?>
         
     </table>
-    <form action="https://localhost/cuentascorrientes/recursos/pagos/aprobado.php" method="POST">
+    <form action="http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/aprobado.php" method="POST">
         <script src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js" data-preference-id="<?php echo $preference->id; ?>">
         </script>
     </form>

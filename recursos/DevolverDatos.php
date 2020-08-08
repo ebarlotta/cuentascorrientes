@@ -27,7 +27,7 @@ switch ($Opcion) {
         $datos = $result->fetch_assoc();
         break;
     case "CargarElementos_panales":
-        $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes";
+        $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes";
         $result = mysqli_query($link, $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
@@ -43,7 +43,7 @@ switch ($Opcion) {
         $datos['preferenciaId'] = 1000; //Revisar
         break;
     case "CargarElementos_descartables":
-        $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Descartables' and IdResidente=$Parametros ORDER BY Anio, Mes";
+        $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Descartables' and IdResidente=$Parametros ORDER BY Anio, Mes";
         $result = mysqli_query($link, $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
@@ -56,7 +56,7 @@ switch ($Opcion) {
         $datos['SaldoDescartables'] = $saldo;
         break;
     case "CargarElementos_servicios":
-        $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Servicios' and IdResidente=$Parametros ORDER BY Anio, Mes";
+        $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Servicios' and IdResidente=$Parametros ORDER BY Anio, Mes";
         $result = mysqli_query($link, $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
@@ -69,7 +69,7 @@ switch ($Opcion) {
         $datos['SaldoServicios'] = $saldo;
         break;
     case "CargarElementos_insumos":
-        $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Insumos' and IdResidente=$Parametros ORDER BY Anio, Mes";
+        $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Insumos' and IdResidente=$Parametros ORDER BY Anio, Mes";
         $result = mysqli_query($link, $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
@@ -82,7 +82,7 @@ switch ($Opcion) {
         $datos['SaldoInsumos'] = $saldo;
         break;
     case "Cargar_detalle_panales":
-        $query = "SELECT * FROM tblElementos WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes, Fecha";
+        $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes, Fecha";
         $result = mysqli_query($link, $query);
         $cont = -1;
         $saldoParcial = 0;
