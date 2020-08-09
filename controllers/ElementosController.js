@@ -35,6 +35,13 @@ misDatos.controller('ElementosController', function($scope, $http) {
     }
 
     $scope.CargarDatosResidente = function(dni) {
+        $scope.MostrarPanales = 1;
+        $scope.MostrarDescartables = 1;
+        $scope.MostrarServicios = 1;
+        $scope.MostrarInsumos = 1;
+
+        $scope.MostrarAgradecimiento = 0;
+
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarDatosResidente&Param=' + dni)
             .then(function(datos) {
                 $scope.Nombre = datos.data['NombrePaciente'];
@@ -53,26 +60,35 @@ misDatos.controller('ElementosController', function($scope, $http) {
 
 
     $scope.CargarElementos = function(id) {
+        $scope.MostrarAgradecimiento = 1;
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_panales&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoPanales = datos.data['SaldoPanales'];
                 $scope.SaldoPanalesCantidad = datos.data['SaldoPanalesCantidad'];
+                if (datos.data['SaldoPanales'] > 0) { $scope.MostrarPanales = 1; } else { $scope.MostrarPanales = 0; }
+                $scope.MostrarAgradecimiento = 0;
             });
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_descartables&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoDescartables = datos.data['SaldoDescartables'];
+                if (datos.data['SaldoDescartables'] > 0) { $scope.MostrarDescartables = 1; } else { $scope.MostrarDescartables = 0; }
                 //$scope.SaldoDescartablesCantidad = datos.data['SaldoDescartablesCantidad'];
+                $scope.MostrarAgradecimiento = 0;
             });
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_servicios&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoServicios = datos.data['SaldoServicios'];
+                if (datos.data['SaldoServicios'] > 0) { $scope.MostrarServicios = 1; } else { $scope.MostrarServicios = 0; }
                 //$scope.SaldoDescartablesCantidad = datos.data['SaldoDescartablesCantidad'];
+                $scope.MostrarAgradecimiento = 0;
             });
 
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_insumos&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoInsumos = datos.data['SaldoInsumos'];
+                if (datos.data['SaldoInsumos'] > 0) { $scope.MostrarInsumos = 1; } else { $scope.MostrarInsumos = 0; }
                 //$scope.SaldoDescartablesCantidad = datos.data['SaldoDescartablesCantidad'];
+                $scope.MostrarAgradecimiento = 0;
             });
     }
 

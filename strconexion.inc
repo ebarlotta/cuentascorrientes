@@ -1,5 +1,6 @@
 <?php 
-$link = new mysqli("localhost", "i8000574_Kiosko", "b100RV2128", "i8000574_Kiosko");  // localhost
+$link = new mysqli("localhost", "root", "", "cuentascorrientes");  // localhost
+//$link = new mysqli("localhost", "i8000574_Kiosko", "b100RV2128", "i8000574_Kiosko");  // localhost
 //$link = new mysqli("localhost", "host67_mysql", "Teamadios2010", "host67_hostal");  // hosting
 
 //    public=TEST-fdef95ef-0842-4447-a176-866b320393bb
