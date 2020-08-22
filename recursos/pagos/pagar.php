@@ -1,8 +1,8 @@
 <?php
-
+session_start();
 use MercadoPago\Config;
 
-session_start();
+
 
 include("../../strconexion.inc");
 if (mysqli_connect_errno()) {
@@ -11,7 +11,7 @@ if (mysqli_connect_errno()) {
 }
 $ID = $_GET['ID'];
 $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
-$resultR = mysqli_query($link, $query);
+$resultR = mysqli_query($_SESSION['link'], $query) or die ('No se puedo conectar');
 $saldoParcial = 0;
 $CantidadParcial = 0;
 $Acum = "";

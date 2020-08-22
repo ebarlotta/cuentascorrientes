@@ -1,5 +1,8 @@
-<?php 
+<?php
+
+ 
 $link = new mysqli("localhost", "root", "", "cuentascorrientes");  // localhost
+$_SESSION['link']=$link;
 //$link = new mysqli("localhost", "i8000574_Kiosko", "b100RV2128", "i8000574_Kiosko");  // localhost
 //$link = new mysqli("localhost", "host67_mysql", "Teamadios2010", "host67_hostal");  // hosting
 

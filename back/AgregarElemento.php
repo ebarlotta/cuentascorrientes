@@ -22,18 +22,18 @@ $mysqli = new mysqli("localhost", "root", "", "cuentascorrientes");
 
 /* Comprueba la conexión */
 if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
+  printf("Connect failed: %s\n", mysqli_connect_error());
+  exit();
 }
 
 $sql = "INSERT INTO tblElementosDescartables (IdResidente, Anio, Mes, Elemento, Fecha, Debe, Haber, Detalle, Cantidad, PrecioUnitario, Pendiente) VALUES ($Id,$Anio,$Mes,'$Elemento','$Fecha',$Debe,$Haber,'$Detalle',$Cantidad,$Precio,1)";
 
-        $mysqli->query($sql);
-        if(mysqli_affected_rows($mysqli)) {
-            $datos['Mensaje'] = "Se guardó el elemento";
-        } else {
-            $datos['Mensaje'] = "No se grabaron los datos";
-        }
+$mysqli->query($sql);
+if (mysqli_affected_rows($mysqli)) {
+  $datos['Mensaje'] = "Se guardó el elemento";
+} else {
+  $datos['Mensaje'] = "No se grabaron los datos";
+}
 
 $datos = json_encode($datos);
 //print_r($datos);
