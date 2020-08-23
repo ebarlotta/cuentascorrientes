@@ -37,15 +37,15 @@ session_start();
                     </div>
 
                 </div>
-                <div style="width: 20%;padding-top: 6px;">
+                <div ng-show="dni" style="width: 20%;padding-top: 6px;">
                     <a href="#" ng-click="CargarDatosResidente(dni);">
-                        <img class="img-perfil" src="assets/panales.jpg" alt=""><br> Consultar
+                        <img ng-model="imgperfil" class="img-perfil" width="100px;" src="{{imgperfil}}" alt=""><br> Consultar
                     </a>
                 </div>
             </div>
             <!--<div ng-show="ID">-->
             <div class="contenedor" style="width: 100%;">
-                <div class="carta" ng-hide="{{MostrarPanales}}">
+                <div class="carta" ng-hide="!MostrarPanales">
 
                     <div class="lado frente">
                         <h3>Pañales</h3>
@@ -66,7 +66,7 @@ session_start();
                     </div>
 
                 </div>
-                <div class="carta" ng-hide="{{MostrarDescartables}}">
+                <div class="carta" ng-hide="!MostrarDescartables">
 
                     <div class="lado frente">
                         <h3>Descartables</h3>
@@ -76,14 +76,16 @@ session_start();
                     <div class="lado atras">
                         <h3>Descartables</h3>
                         <ul>
-                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_descartables(dni);" data-toggle="modal" data-target="#ModalDescartables"></li>
+                            <a href="recursos/pagos/pagarDescartables.php?ID={{ID}}" target="_blank" style="margin-left:30px">
+                                <input type="button" class="button" value="Detalle" />
+                            </a>
                             <li>Saldo: $ {{ SaldoDescartables }}</li>
-                            <li><input type="button" value="Pagar"></li>
+                            <!-- <li><input type="button" value="Pagar"></li> -->
                         </ul>
                     </div>
 
                 </div>
-                <div class="carta" ng-hide="{{MostrarServicios}}">
+                <div class="carta" ng-hide="!MostrarServicios">
 
                     <div class="lado frente">
                         <h3-min>Servicio Geriátrico</h3-min>
@@ -93,15 +95,18 @@ session_start();
                     <div class="lado atras">
                         <h5>Servicios Geriátricos</h5>
                         <ul>
-                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_servicios(dni);" data-toggle="modal" data-target="#ModalServicios"></li>
+                            <a href="recursos/pagos/pagarServicios.php?ID={{ID}}" target="_blank" style="margin-left:30px">
+                                <input type="button" class="button" value="Detalle" />
+                            </a>
+                            <!--<li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_servicios(dni);" data-toggle="modal" data-target="#ModalServicios"></li>-->
                             <li>Saldo: $ {{ SaldoServicios }}</li>
-                            <li><input type="button" value="Pagar"></li>
+                            <!-- <li><input type="button" value="Pagar"></li>-->
                         </ul>
                     </div>
 
                 </div>
 
-                <div class="carta" ng-hide="{{MostrarInsumos}}">
+                <div class="carta" ng-hide="!MostrarInsumos">
 
                     <div class="lado frente">
                         <h3>Insumos</h3>
@@ -111,31 +116,42 @@ session_start();
                     <div class="lado atras">
                         <h3>Insumos</h3>
                         <ul>
-                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_insumos(dni);" data-toggle="modal" data-target="#ModalInsumos"></li>
+                            <a href="recursos/pagos/pagarInsumos.php?ID={{ID}}" target="_blank" style="margin-left:30px">
+                                <input type="button" class="button" value="Detalle" />
+                            </a>
+                            <!-- <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_insumos(dni);" data-toggle="modal" data-target="#ModalInsumos"></li> -->
                             <li>Saldo: $ {{ SaldoInsumos }}</li>
-                            <li><input type="button" value="Pagar"></li>
+                            <!-- <li><input type="button" value="Pagar"></li> -->
                         </ul>
                     </div>
 
                 </div>
-                <div class="carta" ng-hide="{{MostrarAgradecimiento}}">
+                <div class="carta" ng-hide="!MostrarAgradecimiento">
 
                     <div class="lado frente">
-                        <h3>Insumos</h3>
-                        <img src="assets/insumos2.jpg" alt="">
+                        <h3 style="margin-top: 20px;">Usuario Sin Deuda</h3>
+
+                        <img src="assets/logo_vert.jpg" alt="">
                     </div>
 
                     <div class="lado atras">
-                        <h3>Insumos</h3>
-                        <ul>
-                            <li>Detalle: <input type="button" value="Ver el Detalle" ng-click="Cargar_detalle_insumos(dni);" data-toggle="modal" data-target="#ModalInsumos"></li>
-                            <li>Saldo: $ {{ SaldoInsumos }}</li>
-                            <li><input type="button" value="Pagar"></li>
-                        </ul>
+                        <h3>MUCHAS</h3>
+                        <h3>GRACIAS!!!</h3>
+                    </div>
+                </div>
+                <div class="carta" ng-hide="!MostrarError">
+
+                    <div class="lado frente">
+                        <h3 style="margin-top: 20px;">Usuario Inexistente</h3>
+
+                        <img src="assets/logo_vert.jpg" alt="">
                     </div>
 
+                    <div class="lado atras">
+                        <h3>Intente</h3>
+                        <h3>Nuevamente</h3>
+                    </div>
                 </div>
-
             </div>
             <!--</div>-->
         </div>

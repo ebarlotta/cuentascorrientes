@@ -10,7 +10,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 $ID = $_GET['ID'];
-$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
+$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Servicios' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
 $resultR = mysqli_query($link, $query) or die ('No se puedo conectar');
 $saldoParcial = 0;
 $CantidadParcial = 0;

@@ -2,6 +2,8 @@ var misDatos = angular.module('datosApp', ['ngSanitize']);
 
 misDatos.controller('ElementosController', function($scope, $http) {
 
+    $scope.imgperfil = "assets/logo_vert.jpg";
+
     $scope.CargarResidentes = function() {
         //fecha = new Date(document.getElementById('fecha').value).getTime();
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarResidentes&Param=')
@@ -9,8 +11,16 @@ misDatos.controller('ElementosController', function($scope, $http) {
                 $scope.residentes = datos.data;
                 //$scope.Mensaje = datos.data.Mensaje;
                 //console.log(datos.data);
-                $scope.imgperfil = datos.data['FotFoto'];
-                console.log(datos.data['FotFoto']);
+
+                //$mystring = 'abc';
+                //$findme   = 'a';
+                //$pos = strpos($mystring, $findme);
+
+                //$scope.imgperfil = "assets/images/" + datos.data['FotFoto'].indexOf(" ");
+                //$scope.imgperfil = "assets/images/" + datos.data['NombrePaciente'].indexOf(" ") + ".jpg";
+                //console.log(datos.data['FotFoto']);
+                //console.log("Nombre del paciente:");
+                //console.log($scope.imgperfil);
             });
     }
 
@@ -40,19 +50,33 @@ misDatos.controller('ElementosController', function($scope, $http) {
         $scope.MostrarServicios = 1;
         $scope.MostrarInsumos = 1;
 
-        $scope.MostrarAgradecimiento = 0;
+        //$scope.MostrarAgradecimiento = 0;
 
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarDatosResidente&Param=' + dni)
             .then(function(datos) {
-                $scope.Nombre = datos.data['NombrePaciente'];
-                $scope.ID = datos.data['IdPaciente'];
+                if (datos.data['NombrePaciente']) {
+                    $scope.Nombre = datos.data['NombrePaciente'];
+                    $scope.ID = datos.data['IdPaciente'];
+                    $scope.CargarElementos(datos.data['IdPaciente']);
 
-                //console.log("pepep2" + datos.data['IdPaciente']);
-                $scope.CargarElementos(datos.data['IdPaciente']);
-                $scope.imgperfil = datos.data['FotFoto'];
-
+                    if (datos.data['FotFoto']) {
+                        longitud = datos.data['NombrePaciente'].indexOf(" ");
+                        $scope.imgperfil = "assets/images/" + datos.data['NombrePaciente'].substr(0, longitud) + ".jpg";
+                    } else {
+                        $scope.imgperfil = "assets/sinfoto.png";
+                    }
+                    //$scope.imgperfil = "assets/" + datos.data['FotFoto'];
+                    $scope.MostrarError = 0;
+                } else {
+                    $scope.MostrarAgradecimiento = 0;
+                    $scope.MostrarDescartables = 0;
+                    $scope.MostrarInsumos = 0;
+                    $scope.MostrarPanales = 0;
+                    $scope.MostrarServicios = 0;
+                    $scope.MostrarError = 1;
+                }
                 console.log(datos.data['FotFoto']);
-                console.log("Id:" + $scope.ID);
+                //console.log("Id:" + $scope.ID);
             });
     }
 
@@ -65,30 +89,43 @@ misDatos.controller('ElementosController', function($scope, $http) {
             .then(function(datos) {
                 $scope.SaldoPanales = datos.data['SaldoPanales'];
                 $scope.SaldoPanalesCantidad = datos.data['SaldoPanalesCantidad'];
-                if (datos.data['SaldoPanales'] > 0) { $scope.MostrarPanales = 1; } else { $scope.MostrarPanales = 0; }
-                $scope.MostrarAgradecimiento = 0;
+                if (datos.data['SaldoPanales'] > 0) {
+                    $scope.MostrarPanales = 1;
+                    $scope.MostrarAgradecimiento = 0;
+                } else { $scope.MostrarPanales = 0; }
+
             });
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_descartables&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoDescartables = datos.data['SaldoDescartables'];
-                if (datos.data['SaldoDescartables'] > 0) { $scope.MostrarDescartables = 1; } else { $scope.MostrarDescartables = 0; }
+                if (datos.data['SaldoDescartables'] > 0) {
+                    $scope.MostrarDescartables = 1;
+                    $scope.MostrarAgradecimiento = 0;
+                } else { $scope.MostrarDescartables = 0; }
                 //$scope.SaldoDescartablesCantidad = datos.data['SaldoDescartablesCantidad'];
-                $scope.MostrarAgradecimiento = 0;
+                //$scope.MostrarAgradecimiento = 0;
             });
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_servicios&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoServicios = datos.data['SaldoServicios'];
-                if (datos.data['SaldoServicios'] > 0) { $scope.MostrarServicios = 1; } else { $scope.MostrarServicios = 0; }
+                if (datos.data['SaldoServicios'] > 0) {
+                    $scope.MostrarServicios = 1;
+                    $scope.MostrarAgradecimiento = 0;
+                } else { $scope.MostrarServicios = 0; }
                 //$scope.SaldoDescartablesCantidad = datos.data['SaldoDescartablesCantidad'];
-                $scope.MostrarAgradecimiento = 0;
+                //$scope.MostrarAgradecimiento = 0;
             });
 
         $http.get('recursos/DevolverDatos.php' + '?Opcion=CargarElementos_insumos&Param=' + id)
             .then(function(datos) {
                 $scope.SaldoInsumos = datos.data['SaldoInsumos'];
-                if (datos.data['SaldoInsumos'] > 0) { $scope.MostrarInsumos = 1; } else { $scope.MostrarInsumos = 0; }
+                if (datos.data['SaldoInsumos'] > 0) {
+                    $scope.MostrarInsumos = 1;
+                    $scope.MostrarAgradecimiento = 0;
+                } else { $scope.MostrarInsumos = 0; }
                 //$scope.SaldoDescartablesCantidad = datos.data['SaldoDescartablesCantidad'];
-                $scope.MostrarAgradecimiento = 0;
+                console.log(datos.data['SaldoInsumos']);
+                //$scope.MostrarAgradecimiento = 0;
             });
     }
 

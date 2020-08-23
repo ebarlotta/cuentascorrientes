@@ -15,7 +15,7 @@ if($result) {
     exit;
 }
 //Calcula los saldos parciales para poder ser agregados en el pago
-$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
+$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Descartables' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
 $resultR = mysqli_query($link, $query);
 $saldoParcial = 0;
 $CantidadParcial = 0;
@@ -32,7 +32,7 @@ $Mes=Date("m");
 $query="INSERT INTO tblElementosDescartables (IdResidente, Anio, Mes, Elemento, Fecha, Debe, Haber, Detalle, Cantidad, PrecioUnitario, Pendiente, Preferencia) VALUES ($ID, $Ano,$Mes,'Pañales','$Fecha',0,$saldoParcial, 'MercadoPago', $CantidadParcial,0,0,'$preference')";
 
 //$resultInsert = mysqli_query($link, $query);
-$query = "UPDATE tblElementosDescartables SET Pendiente=0 WHERE IdResidente=$ID and Elemento='Panales'";
+$query = "UPDATE tblElementosDescartables SET Pendiente=0 WHERE IdResidente=$ID and Elemento='Descartables'";
 $resultUpdate = mysqli_query($link, $query);
 //echo $query;
 ?>
