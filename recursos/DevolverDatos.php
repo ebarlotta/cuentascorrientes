@@ -21,6 +21,15 @@ switch ($Opcion) {
         }
         $datos = $rows;
         break;
+    case "CargarFoto":
+        $query = "SELECT * FROM tblPacientes WHERE IdPaciente=" . $Parametros;
+        $result = mysqli_query($link, $query);
+        while ($row = $result->fetch_assoc()) {
+            $datos['NombrePaciente'] = $row['NombrePaciente'];
+            //$datos = json_encode($datos);
+            //$datos['imgperfil'] = $row['NombrePaciente'];
+        }
+        break;
     case "CargarDatosResidente":
         $query = "SELECT * FROM tblPacientes WHERE NroDocumento=" . $Parametros;
         $result = mysqli_query($link, $query);
