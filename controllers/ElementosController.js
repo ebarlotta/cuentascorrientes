@@ -24,26 +24,6 @@ misDatos.controller('ElementosController', function($scope, $http) {
             });
     }
 
-    $scope.AgregarElemento = function() {
-        fecha = new Date(document.getElementById('Fecha').value).getTime();
-        console.log(fecha);
-        //anio = fecha.getYear();
-        //mes = date("mm", fecha);
-        $http.get('recursos/AgregarElemento.php' + '?Id=' + $scope.cmbResidente +
-                '&Elemento=' + $scope.cmbElemento +
-                '&Fecha=' + fecha +
-                '&Debe=' + $scope.Precio * $scope.Cantidad +
-                '&Haber=0' +
-                '&Detalle=' + $scope.Detalle +
-                '&Cantidad=' + $scope.Cantidad +
-                '&Precio=' + $scope.Precio
-            )
-            .then(function(datos) {
-                $scope.Mensaje = datos.data['Mensaje'];
-                //$scope.AgregarDetalle(datos, fecha);
-            });
-    }
-
     $scope.CargarDatosResidente = function(dni) {
         $scope.MostrarPanales = 1;
         $scope.MostrarDescartables = 1;
@@ -59,7 +39,7 @@ misDatos.controller('ElementosController', function($scope, $http) {
                     $scope.ID = datos.data['IdPaciente'];
                     $scope.CargarElementos(datos.data['IdPaciente']);
 
-                    if (datos.data['FotFoto']) {
+                    if (!datos.data['FotFoto']) {
                         longitud = datos.data['NombrePaciente'].indexOf(" ");
                         $scope.imgperfil = "assets/images/" + datos.data['NombrePaciente'].substr(0, longitud) + ".jpg";
                     } else {
