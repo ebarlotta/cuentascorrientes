@@ -18,8 +18,8 @@ $Precio = $_GET["Precio"];
 
 $datos = array();
 
-$mysqli = new mysqli("localhost", "root", "", "cuentascorrientes");
-
+//$mysqli = new mysqli("localhost", "root", "", "cuentascorrientes");
+$mysqli = new mysqli("localhost","i8000574_Kiosko", "b100RV2128", "i8000574_Kiosko");
 /* Comprueba la conexión */
 if (mysqli_connect_errno()) {
   printf("Connect failed: %s\n", mysqli_connect_error());

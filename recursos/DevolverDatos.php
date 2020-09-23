@@ -15,7 +15,7 @@ $rows = array();
 switch ($Opcion) {
     case "CargarResidentes":
         $query = "SELECT * FROM tblPacientes WHERE PacienteActivo=1";
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
@@ -23,7 +23,7 @@ switch ($Opcion) {
         break;
     case "CargarFoto":
         $query = "SELECT * FROM tblPacientes WHERE IdPaciente=" . $Parametros;
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         while ($row = $result->fetch_assoc()) {
             $datos['NombrePaciente'] = $row['NombrePaciente'];
             //$datos = json_encode($datos);
@@ -32,12 +32,12 @@ switch ($Opcion) {
         break;
     case "CargarDatosResidente":
         $query = "SELECT * FROM tblPacientes WHERE NroDocumento=" . $Parametros;
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         $datos = $result->fetch_assoc();
         break;
     case "CargarElementos_panales":
         $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes";
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
@@ -53,7 +53,7 @@ switch ($Opcion) {
         break;
     case "CargarElementos_descartables":
         $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Descartables' and IdResidente=$Parametros ORDER BY Anio, Mes";
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
@@ -66,7 +66,7 @@ switch ($Opcion) {
         break;
     case "CargarElementos_servicios":
         $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Servicios' and IdResidente=$Parametros ORDER BY Anio, Mes";
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
@@ -79,7 +79,7 @@ switch ($Opcion) {
         break;
     case "CargarElementos_insumos":
         $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Insumos' and IdResidente=$Parametros ORDER BY Anio, Mes";
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
@@ -92,7 +92,7 @@ switch ($Opcion) {
         break;
     case "Cargar_detalle_panales":
         $query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Panales' and IdResidente=$Parametros ORDER BY Anio, Mes, Fecha";
-        $result = mysqli_query($link, $query);
+        $result = mysqli_query($_SESSION['link'], $query);
         $cont = -1;
         $saldoParcial = 0;
         while ($row = $result->fetch_assoc()) {
