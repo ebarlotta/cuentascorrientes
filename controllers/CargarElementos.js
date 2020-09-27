@@ -23,6 +23,7 @@ misDatos.controller('CargarElementos', function($scope, $http) {
     $scope.AgregarElemento = function() {
         fecha = new Date(document.getElementById('Fecha').value).getTime();
         console.log(fecha);
+        fecha = fecha + 24 * 60 * 60 * 1000;
         //anio = fecha.getYear();
         //mes = date("mm", fecha);
         $http.get('../back/AgregarElemento.php' + '?Id=' + $scope.cmbResidente +
@@ -38,5 +39,9 @@ misDatos.controller('CargarElementos', function($scope, $http) {
                 $scope.Mensaje = datos.data['Mensaje'];
                 //$scope.AgregarDetalle(datos, fecha);
             });
+    }
+
+    $scope.BorrarMensaje = function() {
+        $scope.Mensaje = "";
     }
 });

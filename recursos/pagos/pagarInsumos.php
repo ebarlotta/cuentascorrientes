@@ -22,6 +22,7 @@ while ($row = $resultR->fetch_assoc()) {
     $Acum .= "<td style=\"text-align: center;\">" . $row['Anio'] . "</td>";
     $Acum .= "<td style=\"text-align: center;\">" . $row['Mes'] . "</td>";
     $Acum .= "<td style=\"text-align: center;\">" . $row['Elemento'] . "</td>";
+    $Acum .= "<td style=\"text-align: center;\">" . $row['Detalle'] . "</td>";
     $Acum .= "<td style=\"text-align: center;\">" . substr($row['Fecha'], 8, 2) . "-" . substr($row['Fecha'], 5, 2) . "-" . substr($row['Fecha'], 0, 4) . "</td>";
     $Acum .= "<td style=\"text-align: right;\">" . $row['Cantidad'] . "</td>";
     $Acum .= "<td style=\"text-align: right;\">" . $row['PrecioUnitario'] . "</td>";
@@ -98,6 +99,7 @@ $preference->save();
                     <th style="width: 6%;text-align:center">Año</td>
                     <th style="width: 4%;text-align:center">Mes</td>
                     <th style="width: 10%;text-align:center">Elemento</td>
+                    <th style="width: 10%;text-align:center">Detalle</td>
                     <th style="width: 12%;text-align:center">Fecha<br>Movimiento</td>
                     <th style="width: 5%;text-align:center">Cantidad</td>
                     <th style="width: 8%;text-align:center">Precio<br>Unitario</td>

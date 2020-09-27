@@ -37,14 +37,14 @@
                 </p>
                 <div>
                     Residente
-                    <select class="form-control" ng-model="cmbResidente" ng-change="CargarFoto(cmbResidente);">
+                    <select class="form-control" ng-model="cmbResidente" ng-change="CargarFoto(cmbResidente);BorrarMensaje();">
                     <option value="" selected></option>
                     <option ng-repeat="residente in residentes | orderBy:'NombrePaciente'" value={{residente.IdPaciente}}>{{ residente.NombrePaciente }}</option>
                     </select>
                 </div>
                 <div>
                     Elemento
-                    <select class="form-control" ng-model="cmbElemento">
+                    <select class="form-control" ng-model="cmbElemento" ng-change="BorrarMensaje();">
                         <option value="" selected></option>
                         <option value="Panales">Pañales</option>
                         <option value="Descartables">Descartables</option>
@@ -54,19 +54,19 @@
                 </div>
                 <div>
                     Cantidad
-                    <input class="form-control" type="text" ng-model="Cantidad" placeholder="Cantidad">
+                    <input class="form-control" type="text" ng-model="Cantidad" placeholder="Cantidad" ng-change="BorrarMensaje();">
                 </div>
                 <div>
                     Fecha
-                    <input class="form-control" type="date" ng-model="Fecha" id="Fecha">
+                    <input class="form-control" type="date" ng-model="Fecha" id="Fecha" ng-change="BorrarMensaje();">
                 </div>
                 <div>
                     Precio Unitario
-                    <input class="form-control" type="text" ng-model="Precio" placeholder="Precio Unitario">
+                    <input class="form-control" type="text" ng-model="Precio" placeholder="Precio Unitario" ng-change="BorrarMensaje();">
                 </div>
                 <div>
                     Detalle
-                    <textarea class="form-control" name="" id="" cols="30" ng-model="Detalle" rows="3"></textarea>
+                    <textarea class="form-control" name="" id="" cols="30" ng-model="Detalle" rows="3" ng-change="BorrarMensaje();"></textarea>
                 </div><br>
                 <div class="row col-sm-12 justify-content-md-center">
                     <input class="form-control col-sm-5 offset-sm-1 btn btn-success" type="button" value="Agregar" ng-click="AgregarElemento();"><input class="form-control col-5 offset-md-1 btn btn-info" type="button" value="Volver">
