@@ -474,10 +474,10 @@ ul.contact li a.icon-rss:before {
 /*********************************************************************************/
 
 #header-featured {
-    padding: 10em 0em;
+    padding: 4em 0em;
     background-image: url(images/banner.jpg);
     background-position: center;
-    background-size: cover;
+    background-size: auto;
 }
 
 #header-featured1 {
@@ -485,16 +485,17 @@ ul.contact li a.icon-rss:before {
     background-image: url(images/banner1.jpg);
     background-position: center;
     background-size: cover;
+    background-repeat: round;
 }
 
 #banner-wrapper {}
 
 #banner {
     overflow: hidden;
-    width: 1000px;
+    /*width: 1000px;*/
     text-align: center;
     color: rgba(255, 255, 255, .7);
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 #banner a {

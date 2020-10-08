@@ -22,6 +22,7 @@ while ($row = $resultR->fetch_assoc()) {
     $Acum .= "<td style=\"text-align: center;\">" . $row['Anio'] . "</td>";
     $Acum .= "<td style=\"text-align: center;\">" . $row['Mes'] . "</td>";
     $Acum .= "<td style=\"text-align: center;\">" . $row['Elemento'] . "</td>";
+    $Acum .= "<td style=\"text-align: center;\">" . $row['Detalle'] . "</td>";
     $Acum .= "<td style=\"text-align: center;\">" . substr($row['Fecha'], 8, 2) . "-" . substr($row['Fecha'], 5, 2) . "-" . substr($row['Fecha'], 0, 4) . "</td>";
     $Acum .= "<td style=\"text-align: right;\">" . $row['Cantidad'] . "</td>";
     $Acum .= "<td style=\"text-align: right;\">" . $row['PrecioUnitario'] . "</td>";
@@ -55,7 +56,7 @@ $preference->auto_return = "approved";
 
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
-$item->title = 'Pañales descartables para adulto';
+$item->title = 'Servicios utilizados';
 $item->quantity = 1;
 $item->unit_price = $saldoParcial;
 $preference->items = array($item);
@@ -93,11 +94,12 @@ $preference->save();
             <p><strong>Residencia para Adultos Mayores</strong></p>
         </div>
         <strong>
-            <table class="table-responsive table-striped w-auto container" style="color:beige;background: rgba(95, 179, 119, 0.5); margin-bottom: 25px;">
+            <table class="table table-striped" style="color:beige;background: rgba(95, 179, 119, 0.5); margin-bottom: 25px;">
                 <tr>
                     <th style="width: 6%;text-align:center">Año</td>
                     <th style="width: 4%;text-align:center">Mes</td>
                     <th style="width: 10%;text-align:center">Elemento</td>
+                    <th style="width: 10%;text-align:center">Detalle</td>
                     <th style="width: 12%;text-align:center">Fecha<br>Movimiento</td>
                     <th style="width: 5%;text-align:center">Cantidad</td>
                     <th style="width: 8%;text-align:center">Precio<br>Unitario</td>

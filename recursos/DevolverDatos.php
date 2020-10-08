@@ -31,7 +31,7 @@ switch ($Opcion) {
         }
         break;
     case "CargarDatosResidente":
-        $query = "SELECT * FROM tblPacientes WHERE NroDocumento=" . $Parametros;
+        $query = "SELECT * FROM tblPacientes WHERE NroDocumento=" . $Parametros . " and (PacienteActivo=1 or PacienteActivo=2)";
         $result = mysqli_query($_SESSION['link'], $query);
         $datos = $result->fetch_assoc();
         break;

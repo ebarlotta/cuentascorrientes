@@ -20,6 +20,9 @@ $resultR = mysqli_query($link, $query);
 $saldoParcial = 0;
 $CantidadParcial = 0;
 $Acum = "";
+//echo $query;
+//preference_id=548162703-bce38ba5-c7ec-4085-8d60-0098ff14ae27&external_reference=&back_url=http%3A%2F%2Fbarberdesarrollos.com%2Fcuentascorrientes%2Frecursos%2Fpagos%2Faprobado.php%3Fcollection_id%3D10492670359%26collection_status%3Dapproved%26external_reference%3Dnull%26payment_type%3Daccount_money%26merchant_order_id%3D1845511863%26preference_id%3D548162703-bce38ba5-c7ec-4085-8d60-0098ff14ae27%26site_id%3DMLA%26processing_mode%3Daggregator%26merchant_account_id%3Dnull&payment_id=10492670359&payment_status=approved&payment_status_detail=accredited&merchant_order_id=1845511863&processing_mode=aggregator&merchant_account_id=
+
 while ($row=$resultR->fetch_assoc()) {
     $saldoParcial = $saldoParcial + $row["Debe"] - $row["Haber"];   // Cuenta el saldo parcial de cada item
     $CantidadParcial = $CantidadParcial + $row['Cantidad'];     // Cuenta la cantidad de pañales totales

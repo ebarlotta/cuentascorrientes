@@ -56,7 +56,7 @@ $preference->auto_return = "approved";
 
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
-$item->title = 'Pañales descartables para adulto';
+$item->title = 'Insumos médicos utilizados';
 $item->quantity = 1;
 $item->unit_price = $saldoParcial;
 $preference->items = array($item);
@@ -94,7 +94,7 @@ $preference->save();
             <p><strong>Residencia para Adultos Mayores</strong></p>
         </div>
         <strong>
-            <table class="table-responsive table-striped w-auto container" style="color:beige;background: rgba(95, 179, 119, 0.5); margin-bottom: 25px;">
+            <table class="table table-striped" style="color:beige;background: rgba(95, 179, 119, 0.5); margin-bottom: 25px; font-size:1em;">
                 <tr>
                     <th style="width: 6%;text-align:center">Año</td>
                     <th style="width: 4%;text-align:center">Mes</td>
