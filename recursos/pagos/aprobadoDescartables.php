@@ -29,7 +29,7 @@ while ($row=$resultR->fetch_assoc()) {
 $Ano=Date("Y");
 $Mes=Date("m");
 //Agrega el pago en la base de datos
-$query="INSERT INTO tblElementosDescartables (IdResidente, Anio, Mes, Elemento, Fecha, Debe, Haber, Detalle, Cantidad, PrecioUnitario, Pendiente, Preferencia) VALUES ($ID, $Ano,$Mes,'Pañales','$Fecha',0,$saldoParcial, 'MercadoPago', $CantidadParcial,0,0,'$preference')";
+$query="INSERT INTO tblElementosDescartables (IdResidente, Anio, Mes, Elemento, Fecha, Debe, Haber, Detalle, Cantidad, PrecioUnitario, Pendiente, Preferencia) VALUES ($ID, $Ano,$Mes,'Descartables','$Fecha',0,$saldoParcial, 'MercadoPago', $CantidadParcial,0,0,'$preference')";
 $resultInsert = mysqli_query($link, $query);
 
 $query = "UPDATE tblElementosDescartables SET Pendiente=0 WHERE IdResidente=$ID and Elemento='Descartables'";

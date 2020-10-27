@@ -10,7 +10,8 @@ if (mysqli_connect_errno()) {
     exit();
 }
 $ID = $_GET['ID'];
-$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Insumos' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
+$query = "SELECT tblElementosDescartables.id, tblElementosDescartables.IdResidente, tblPacientes.NombrePaciente, tblElementosDescartables.Anio, tblElementosDescartables.Mes, tblElementosDescartables.Elemento, tblElementosDescartables.Fecha, tblElementosDescartables.Debe, tblElementosDescartables.Haber, tblElementosDescartables.Detalle, tblElementosDescartables.Cantidad, tblElementosDescartables.PrecioUnitario, tblElementosDescartables.Pendiente, tblElementosDescartables.Preferencia FROM tblElementosDescartables, tblPacientes WHERE tblElementosDescartables.Pendiente=1 and tblElementosDescartables.Elemento='Insumos' and tblElementosDescartables.IdResidente=$ID and tblElementosDescartables.IdResidente=tblPacientes.IdPaciente ORDER BY Anio, Mes, Fecha";
+//$query = "SELECT * FROM tblElementosDescartables WHERE Pendiente=1 and Elemento='Insumos' and IdResidente=$ID ORDER BY Anio, Mes, Fecha";
 $resultR = mysqli_query($link, $query) or die ('No se puedo conectar');
 $saldoParcial = 0;
 $CantidadParcial = 0;
@@ -56,7 +57,7 @@ $preference->auto_return = "approved";
 
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
-$item->title = 'Insumos médicos utilizados';
+$item->title = "Insumos médicos utilizados" . " - " . $row['NombrePaciente'];
 $item->quantity = 1;
 $item->unit_price = $saldoParcial;
 $preference->items = array($item);
