@@ -48,7 +48,7 @@ MercadoPago\SDK::setAccessToken('APP_USR-5410638389360943-083101-a6f1979707e1508
 $preference = new MercadoPago\Preference();
 
 $preference->back_urls = array(
-    "success" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/aprobado.php",
+    "success" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/aprobadoDescartables.php?id=".$preference->id."&IDR=".$ID,
     "failure" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/error.html",
     "pending" => "http://barberdesarrollos.com/cuentascorrientes/recursos/pagos/pendiente.php"
 );
